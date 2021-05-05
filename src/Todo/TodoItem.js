@@ -12,8 +12,7 @@ export default class TodoItem extends Component {
     this.state = {};
   }
   render() {
-    console.log(this.props.todo);
-    const { checked, todo } = this.props;
+    const { checked, todo,deleteTodo } = this.props;
 
     const classes = []
 
@@ -22,7 +21,7 @@ export default class TodoItem extends Component {
         classes.push('done')
     }
     return (
-      <li>
+      <li className="list-group-item">
         <input
           type="checkbox"
           name=""
@@ -32,7 +31,7 @@ export default class TodoItem extends Component {
           }}
         />
         <span className={classes} style={styles.span}>{todo.title}</span>
-        <button>Delete</button>
+        <button onClick={()=>{deleteTodo(todo.id)}} className="btn btn-primary">Delete</button>
       </li>
     );
   }

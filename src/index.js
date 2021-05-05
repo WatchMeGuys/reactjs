@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import {App} from './App';
 import reportWebVitals from './reportWebVitals';
+import HookTest,{HookClass} from './hooks/hooks';
 
 
+export const MyContext = createContext()
+
+const styles = {
+  red: {
+    color: 'red'
+  },
+  blue:{
+    color: 'blue'
+  }
+}
 ReactDOM.render(
   <React.StrictMode>
     <App />
+
   </React.StrictMode>,
   document.getElementById('root')
 );

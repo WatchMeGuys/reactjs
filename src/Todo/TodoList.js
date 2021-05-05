@@ -6,16 +6,14 @@ export default class TodoList extends Component {
     super(props);
 
     this.state = {
-      todos: [
-        { id: 1, title: "Сделать уроки", complete: false },
-        { id: 2, title: "Сделать дом. дела", complete: false },
-        { id: 3, title: "Купить хлеб", complete: false },
-        { id: 4, title: "Купить молоко", complete: false },
-      ],
-      inputValue: null
+      todos: [],
+      inputValue: '',
+      currentPage: 1,
+      todoPerPage: 10,
     };
     this.onCheckedTodo = this.onCheckedTodo.bind(this);
     this.addTodo = this.addTodo.bind(this);
+    this.deleteTodo = this.deleteTodo.bind(this)
   }
   onCheckedTodo(id) {
     console.log("checked", id);
@@ -30,7 +28,9 @@ export default class TodoList extends Component {
   }
   addTodo(event) {
     event.preventDefault();
-    console.log("qwe");
+    if(this.state.inputValue <= 0){
+      alert('Заполнитель значение')
+    }else{
     let todos = this.state.todos.concat([
       {
         title: this.state.inputValue,
@@ -39,19 +39,38 @@ export default class TodoList extends Component {
       },
     ]);
     this.setState({todos})
+    }
+  }
+  deleteTodo(id){
+    // console.log('delete ',id)
+
+    let todos = this.state.todos.filter(val=>{
+      return val.id !== id
+    })
+    this.setState({todos:todos})
+  }
+  componentDidMount(){
+    fetch('http://jsonplaceholder.typicode.com/todos')
+    .then(res => res.json())
+    .then(res=> this.setState({todos:res}))
+
+    // console.log(res)
   }
   render() {
     const { todos } = this.state;
-
+    const indexLastTodo = this.state.currentPage * this.state.todoPerPage
+    const indexFirsTodo = indexLastTodo - this.state.todoPerPage
+    const currentTodos = todos.slice(indexFirsTodo,indexLastTodo)
+    console.log(todos)
     return (
-      <ul>
+      <ul className="list-group">
         <form onSubmit={this.addTodo}>
           <input placeholder="type here" onChange={(event)=>{this.setState({inputValue: event.target.value})}}/>
           <button type="submit">Add </button>
         </form>
-        {todos.map((val) => {
+        {currentTodos.map((val) => {
           return (
-            <TodoItem todo={val} key={val.id} checked={this.onCheckedTodo} />
+            <TodoItem todo={val} key={val.id} checked={this.onCheckedTodo} deleteTodo={this.deleteTodo} />
           );
         })}
       </ul>
