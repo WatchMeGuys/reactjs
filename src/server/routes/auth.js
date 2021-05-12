@@ -15,12 +15,16 @@ router.post('/login',(req,res)=>{
 
     try{
         const {email,password} = req.body
+
+        // находим пользователя по совпадению емайла и пароля
         let findedUser = users.find(user=> user.email == email && user.password == password )
 
         if(!findedUser){
+            // если пользователя нет в списке, выводим информацию что пользователь не найден
             res.status(400).json("User not found")
         }
 
+        // создаем токен используя ИД пользователя и секретный ключ для него, говорим токену что жизненный цикл его составляет 1 час
         let token = jwt.sign(
             {userId: findedUser.id},
             jwtSecret,

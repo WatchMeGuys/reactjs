@@ -8,9 +8,10 @@ import {AuthContext} from './context/AuthContext'
 import {AuthHook} from './hooks/auth.hook'
 
 export default function App() {
-
+    // импортируем функции из хука, для того чтобы их переписать в контексте и передавать на остальные страницы
     const {login,logout,token,userId} = AuthHook()
-    console.log('App')
+
+    // в зависимости от токена - выставляем значение isAuth - true / false
     const isAuth = !!token
     return (
       <AuthContext.Provider value={{login,logout,token,userId,isAuth}}>

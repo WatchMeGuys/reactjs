@@ -30,6 +30,8 @@ export default class AccPage extends Component {
   loginHandler(e){
     e.preventDefault()
     
+    // делаем POST запрос на сервер для авторизации
+
     fetch('/api/auth/login',{
         method: "POST",
         headers: {
@@ -39,6 +41,7 @@ export default class AccPage extends Component {
     })
     .then(res => res.json() )
     .then(res =>{
+        // При удачном ответе - выставляем состояни и вызываем метод авторизации 
         this.setState({token: res.token})
         this.setState({userInfo: res.userInfo})
         this.context.login(res.token,res.userInfo.id)
@@ -84,6 +87,7 @@ export default class AccPage extends Component {
               }}
             />
           </div>
+          {/* Делаем проверку на то, что пользователь авторизовался, если true - ыводится кнопка регистрации, если false - кнопко логина */}
           {!auth.isAuth ? (
           <button className="btn btn-primary" onClick={(e)=>{this.loginHandler(e)}}>
             Login

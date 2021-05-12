@@ -4,6 +4,7 @@ export function AuthHook(){
     const [token,setToken] = useState(null)
     const [userId,setUserId] = useState(null)
 
+    // Добавление значения в локальное хранилище 
     const login = useCallback((jwtToken,id)=>{
         setToken(jwtToken)
         setUserId(id)
@@ -12,6 +13,7 @@ export function AuthHook(){
 
     },[])
 
+    // Удаление значения из локального хранилища ( иммитирует выход пользователя из аккаунта )
     const logout = useCallback(()=>{
         setToken(null)
         setUserId(null)
@@ -20,6 +22,7 @@ export function AuthHook(){
     },[])
 
 
+    // проверяем, есть ли запись в локальном хранилище, если есть, то вызывается метод логина, который обновляет данные
     useEffect(()=>{
         const data = JSON.parse(localStorage.getItem('UserToken'))
 
