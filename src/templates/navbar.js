@@ -18,14 +18,7 @@ export default function Navbar() {
                 <Link to="/users" class="nav-link" >Users</Link>
             </li>
             <li class="nav-item">
-              <a
-                class="nav-link disabled"
-                href="#"
-                tabindex="-1"
-                aria-disabled="true"
-              >
-                Disabled
-              </a>
+                <Link to="/acc" class="nav-link" >Login or Registation</Link>
             </li>
           </ul>
         </div>
