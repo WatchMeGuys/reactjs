@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import UserInfo from './UserInfo';
+import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 document.body.style = 'background: linear-gradient(to right ,#000000,#800000,#000000) ';
@@ -12,7 +13,7 @@ const styles = {
         marginTop: '50px',
         marginLeft: '15px',
         fontSize: '25px',
-        colorLink: 'red',
+        color: '#000000',
         left: '27%'
     },
     infoContainer: {
@@ -49,7 +50,7 @@ export default class UserList extends Component {
 
                         <ul style={styles.usersContainer} class="list-group">
                             {this.state.user.map((val) => {
-                                return (<Link to={`/users/id/${val.id}`} > {val.username} </Link>);
+                                return (<NavLink to={`/users/id/${val.id}`}  style={{color:"white", fontWeight:"bold",  textDecoration: 'none' }} > {val.username} </NavLink>);
                             })}
                         </ul>
                     </div>
