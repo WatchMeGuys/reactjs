@@ -3,6 +3,7 @@ import '../index.css';
 const styles = {
   span: {
     marginRight: "100px",
+    color:'black',
   },
 };
 
@@ -21,7 +22,7 @@ export default class TodoItem extends Component {
         classes.push('done')
     }
     return (
-      <li className="list-group-item">
+      <li className="list-group-item list-group-item-action list-group-item-danger">
         <input
           type="checkbox"
           name=""
@@ -31,7 +32,7 @@ export default class TodoItem extends Component {
           }}
         />
         <span className={classes} style={styles.span}>{todo.title}</span>
-        <button onClick={()=>{deleteTodo(todo.id)}} className="btn btn-primary">Delete</button>
+        <button onClick={()=>{deleteTodo(todo.id)}} className="btn btn-outline-danger">Delete</button>
       </li>
     );
   }

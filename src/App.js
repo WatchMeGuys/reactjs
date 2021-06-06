@@ -4,6 +4,7 @@ import Navbar from "./templates/navbar";
 import TodoList from './Todo/TodoList'
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
 import AccPage from './pages/Acc';
+import UserList from './User/UserList';
 import {AuthContext} from './context/AuthContext'
 import {AuthHook} from './hooks/auth.hook'
 
@@ -20,7 +21,7 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/todos" component={TodoList} />
-        <Route path="/users" component={UserPage} />
+        <Route path="/users" component={UserList} />
         <Route path="/acc" component={AccPage} />
       </Switch>
       </Router>
@@ -31,11 +32,5 @@ export default function App() {
 const Home =()=>{
   return(
     <div>Home page</div>
-  )
-}
-
-const UserPage =()=>{
-  return(
-    <div>Users page</div>
   )
 }
